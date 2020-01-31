@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate",
+  "name": "udacity-chirper",
   "version": "0.1.0",
-  "description": "Boilerplate setup for react projects",
+  "description": "Twitter like application that allows you to create a tweet, like a tweet, or respond to a tweet",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,9 +13,10 @@
     "deploy": "gh-pages -d dist"
   },
   "keywords": [
-    "react-boilerplate",
-    "create-react-app",
-    "react setup"
+    "twitter-clone",
+    "chirper",
+    "udacity-chirper",
+    "udacity chirper"
   ],
   "author": "Aman Kumar",
   "license": "ISC",
@@ -62,10 +63,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/am-an-kumar/react-boilerplate.git"
+    "url": "git+https://github.com/am-an-kumar/udacity-chirper.git"
   },
   "bugs": {
-    "url": "https://github.com/am-an-kumar/react-boilerplate/issues"
+    "url": "https://github.com/am-an-kumar/udacity-chirper/issues"
   },
-  "homepage": "https://github.com/am-an-kumar/react-boilerplate#readme"
+  "homepage": "https://github.com/am-an-kumar/udacity-chirper#readme"
 }
