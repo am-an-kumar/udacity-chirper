@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+    />
+    <title>Udacity Chirper</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- html-webpack-plugin parses this. Node sets the environment based on the script you run, so we add the CDN links based on NODE_ENV -->
+    <% if(process.env.NODE_ENV === 'production') { %>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    ></script>
+    <% } %>
+  </body>
+</html>
