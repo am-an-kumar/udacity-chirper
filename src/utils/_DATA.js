@@ -1,3 +1,4 @@
+// all users
 let users = {
   sarah_edo: {
     id: 'sarah_edo',
@@ -42,6 +43,7 @@ let users = {
   },
 }
 
+// all tweets
 let tweets = {
   '8xf0y6ziyjabvozdd253nd': {
     id: '8xf0y6ziyjabvozdd253nd',
@@ -236,3 +238,87 @@ let tweets = {
     replies: [],
   },
 }
+
+export const _getUsers = () =>
+  new Promise(
+    // eslint-disable-next-line no-unused-vars
+    (resolve, reject) => setTimeout(() => resolve({ ...users })),
+    1000,
+  )
+
+export const _getTweets = () =>
+  new Promise(
+    // eslint-disable-next-line no-unused-vars
+    (resolve, reject) => setTimeout(() => resolve({ ...tweets })),
+    100,
+    0,
+  )
+
+export const _saveLikeToggle = ({ id, hasLiked, authedUser }) =>
+  // eslint-disable-next-line no-unused-vars
+  new Promise((resolve, reject) =>
+    setTimeout(() => {
+      tweets = {
+        ...tweets,
+        [id]: {
+          ...tweets[id],
+          likes:
+            hasLiked === true
+              ? tweets[id].likes.filter(uid => uid !== authedUser)
+              : tweets[id].likes.concat([authedUser]),
+        },
+      }
+      resolve()
+    }, 500),
+  )
+
+// generates a random ID to be used as tweet id
+const generateUID = () =>
+  Math.random()
+    .toString(36)
+    .substring(2, 15) +
+  Math.random()
+    .toString(36)
+    .substring(2, 15)
+
+// formats a tweet
+const formatTweet = ({ author, text, replyingTo = null }) => {
+  return {
+    author,
+    id: generateUID(),
+    likes: [],
+    replies: [],
+    text,
+    timestamp: Date.now(),
+    replyingTo,
+  }
+}
+
+export const _saveTweet = ({ text, author, replyingTo }) =>
+  // eslint-disable-next-line no-unused-vars
+  new Promise((resolve, reject) => {
+    // formatting the tweet
+    const formattedTweet = formatTweet({
+      text,
+      author,
+      replyingTo,
+    })
+
+    setTimeout(() => {
+      // adding tweet
+      tweets = {
+        ...tweets,
+        [formattedTweet.id]: formattedTweet,
+      }
+      // adding tweet id to the list of tweets of author
+      users = {
+        ...users,
+        [author]: {
+          ...users[author],
+          tweets: users[author].tweets.concat([formattedTweet.id]),
+        },
+      }
+
+      resolve(formattedTweet)
+    }, 1000)
+  })
