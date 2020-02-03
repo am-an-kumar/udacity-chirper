@@ -1,8 +1,12 @@
 const logger = store => next => action => {
   console.group(action.type)
-  console.log(`The action: ${action}`)
+  console.group('action')
+  console.dir(action)
+  console.groupEnd()
   next(action)
-  console.log(`The new state: ${store.getState()}`)
+  console.group('new state')
+  console.dir(store.getState())
+  console.groupEnd()
   console.groupEnd()
 }
 
