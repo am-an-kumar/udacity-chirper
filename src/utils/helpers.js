@@ -21,6 +21,7 @@ export const formatTweet = (tweet, author, authedUser, parentTweet) => {
     likes: likes.length,
     replies: replies.length,
     hasLiked: likes.includes(authedUser),
+    authorId: author.id,
     parent: parentTweet
       ? {
           author: parentTweet.author,

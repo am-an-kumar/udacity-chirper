@@ -9,8 +9,14 @@ const tweets = (state = {}, action) => {
       }
 
     case TOGGLE_TWEET: {
-      const { id, hasLiked, authedUser } = action
+      const { id, hasLiked, authedUser, authorId } = action
       const tweet = state[id]
+
+      // TOGGLE_TWEET action is dispatched as a result of a user attempting to like his/her own tweet
+      if (authorId === authedUser) {
+        return state
+      }
+
       return {
         ...state,
         [id]: {

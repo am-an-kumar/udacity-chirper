@@ -20,6 +20,7 @@ class Tweet extends Component {
         authedUser,
         id: tweet.id,
         hasLiked: tweet.hasLiked,
+        authorId: tweet.authorId,
       }),
     )
   }

@@ -255,8 +255,7 @@ export const _getTweets = () =>
     }, 1000)
   })
 
-export const _saveLikeToggle = ({ id, hasLiked, authedUser }) =>
-  // eslint-disable-next-line no-unused-vars
+export const _saveLikeToggle = ({ id, authorId, hasLiked, authedUser }) =>
   new Promise((resolve, reject) =>
     setTimeout(() => {
       tweets = {
@@ -269,6 +268,12 @@ export const _saveLikeToggle = ({ id, hasLiked, authedUser }) =>
               : tweets[id].likes.concat([authedUser]),
         },
       }
+
+      // rejecting toggle if a user tries to like his own tweet. Typically control will never come here as no async operation is performed in this case inside action creator
+      if (authedUser === authorId) {
+        reject()
+      }
+
       resolve()
     }, 500),
   )
