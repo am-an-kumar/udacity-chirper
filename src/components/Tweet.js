@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { formatTweet } from '../utils/helpers.js'
 
 const Tweet = ({ tweetId, tweet }) => {
+  if (tweet === null) {
+    return <p>There is no tweet as such</p>
+  }
+
   const { parent } = tweet
   return (
     <li>
@@ -14,14 +18,12 @@ const Tweet = ({ tweetId, tweet }) => {
 
 const mapStateToProps = ({ tweets, users, authedUser }, { tweetId }) => {
   const tweet = tweets[tweetId]
+  const parentTweet = tweet ? tweets[tweet.replyingTo] : null
   return {
     authedUser,
-    tweet: formatTweet(
-      tweet,
-      users[tweet.author],
-      authedUser,
-      tweets[tweet.replyingTo],
-    ),
+    tweet: tweet
+      ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
+      : null,
   }
 }
 
