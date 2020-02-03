@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './components/App'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './reducers'
 import '@babel/polyfill'
 import './css/style.css'
 
@@ -11,4 +14,11 @@ if (process.env.NODE_ENV === 'development') {
   axe(React, ReactDOM, 1000)
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const store = createStore(reducer)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+)
