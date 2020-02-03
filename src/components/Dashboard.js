@@ -7,7 +7,7 @@ class Dashboard extends Component {
     const { tweetIds } = this.props
     return (
       <div>
-        <h3>Your timeline</h3>
+        <h3 className='center'>Your timeline</h3>
         <ul>
           {tweetIds.map(tweetId => (
             <Tweet tweetId={tweetId} key={tweetId} />
