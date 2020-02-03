@@ -1,7 +1,8 @@
+import { saveLikeToggle } from '../utils/api'
+import { toast } from 'react-toastify'
+
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
-
-import { saveLikeToggle } from '../utils/api'
 
 export const receiveTweets = tweets => ({
   type: RECEIVE_TWEETS,
@@ -19,7 +20,7 @@ const toggleTweet = ({ id, authorId, authedUser, hasLiked }) => ({
 export const handleToggleTweet = info => {
   // dispatching action locally without performing any async operation if a user attempts to like his/her own tweet
   if (info.authedUser === info.authorId) {
-    console.error('Sorry!!! You are not allowed to like your own tweet')
+    toast.error("Can't like your own tweet")
     return toggleTweet({ ...info })
   }
 
@@ -28,9 +29,13 @@ export const handleToggleTweet = info => {
     dispatch(toggleTweet({ ...info }))
 
     saveLikeToggle(info)
-      .then(() => console.log('Toggled successfully'))
+      .then(() =>
+        toast.success(info.hasLiked ? 'Tweet like removed' : 'Tweet liked'),
+      )
       .catch(() => {
-        console.error('Error while toggling')
+        toast.error(
+          info.hasLiked ? 'Error removing tweet like' : 'Error liking tweet',
+        )
         // reverting the UI change if server returns an error
         dispatch(toggleTweet({ ...info }))
       })
