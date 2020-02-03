@@ -240,19 +240,20 @@ let tweets = {
 }
 
 export const _getUsers = () =>
-  new Promise(
-    // eslint-disable-next-line no-unused-vars
-    (resolve, reject) => setTimeout(() => resolve({ ...users })),
-    1000,
-  )
+  // eslint-disable-next-line no-unused-vars
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ ...users })
+    }, 1000)
+  })
 
 export const _getTweets = () =>
-  new Promise(
-    // eslint-disable-next-line no-unused-vars
-    (resolve, reject) => setTimeout(() => resolve({ ...tweets })),
-    100,
-    0,
-  )
+  // eslint-disable-next-line no-unused-vars
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ ...tweets })
+    }, 1000)
+  })
 
 export const _saveLikeToggle = ({ id, hasLiked, authedUser }) =>
   // eslint-disable-next-line no-unused-vars
