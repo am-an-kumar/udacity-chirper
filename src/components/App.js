@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import LoadingBar from 'react-redux-loading'
 import Dashboard from './Dashboard'
 
 class App extends Component {
@@ -10,8 +11,12 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.props
-    return loading ? <p>Loading</p> : <Dashboard />
+    return (
+      <>
+        <LoadingBar />
+        {!this.props.loading && <Dashboard />}
+      </>
+    )
   }
 }
 

@@ -38,17 +38,20 @@ class Tweet extends Component {
       <div className='tweet'>
         <img src={avatar} alt={`Avatar of ${name}`} className='avatar' />
         <div className='tweet-info'>
-          <span>{name}</span>
-          <div>{formatDate(timestamp)}</div>
-          {parent && (
-            <button
-              className='replying-to'
-              onClick={e => this.redirectToParent(e, parent.id)}
-            >
-              {`Replying to ${parent.author}`}
-            </button>
-          )}
-          <p>{text}</p>
+          <div>
+            <span>{name}</span>
+            <div>{formatDate(timestamp)}</div>
+            {parent && (
+              <button
+                className='replying-to'
+                onClick={e => this.redirectToParent(e, parent.id)}
+              >
+                {`Replying to ${parent.author}`}
+              </button>
+            )}
+            <p>{text}</p>
+          </div>
+
           <div className='tweet-icons'>
             <TiArrowBackOutline className='tweet-icon' />
             {replies !== 0 && <span>{replies}</span>}
