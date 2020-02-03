@@ -4,6 +4,7 @@ import App from './components/App'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
+import middleware from './middleware'
 import '@babel/polyfill'
 import './css/style.css'
 
@@ -14,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
   axe(React, ReactDOM, 1000)
 }
 
-const store = createStore(reducer)
+const store = createStore(reducer, middleware)
 
 ReactDOM.render(
   <Provider store={store}>
