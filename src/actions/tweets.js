@@ -49,7 +49,7 @@ const addTweet = tweet => ({
   tweet,
 })
 
-export const handleAddTweet = (text, replyingTo = null) => {
+export const handleAddTweet = (text, replyingTo) => {
   return (dispatch, getState) => {
     const { authedUser } = getState()
 

@@ -17,8 +17,9 @@ class NewTweet extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const { text } = this.state
+    const { dispatch, replyingTo } = this.props
 
-    this.props.dispatch(handleAddTweet(text))
+    dispatch(handleAddTweet(text, replyingTo))
 
     // resetting form state
     this.setState({
