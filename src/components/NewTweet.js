@@ -32,6 +32,7 @@ class NewTweet extends Component {
 
   render() {
     const { text, redirectToHome } = this.state
+    const { replyingTo } = this.props
 
     // redirecting to / if a new tweet is added
     if (redirectToHome) {
@@ -44,7 +45,9 @@ class NewTweet extends Component {
 
     return (
       <div>
-        <h3 className='center'>Compose new tweet</h3>
+        <h3 className='center'>
+          {replyingTo ? 'Reply to tweet' : 'Compose new tweet'}
+        </h3>
         <form className='new-tweet' onSubmit={this.handleSubmit}>
           <textarea
             placeholder="What's happening?"
