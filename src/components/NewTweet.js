@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleAddTweet } from '../actions/tweets'
 
 class NewTweet extends Component {
   state = {
     text: '',
+    redirectToHome: false,
   }
 
   handleChange = event => {
@@ -24,13 +26,19 @@ class NewTweet extends Component {
     // resetting form state
     this.setState({
       text: '',
+      redirectToHome: replyingTo !== null ? true : false,
     })
   }
 
   render() {
+    const { text, redirectToHome } = this.state
+
+    if (redirectToHome) {
+      return <Redirect to='/' />
+    }
+
     const maxLength = 280
     const warningLength = 100
-    const { text } = this.state
     const charactersLeft = maxLength - text.length
 
     return (
