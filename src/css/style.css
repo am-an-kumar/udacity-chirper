@@ -132,6 +132,11 @@ li {
   padding: 0;
   color: #969696;
   cursor: pointer;
+  outline: none;
+}
+
+.replying-to:hover {
+  color: #00b5d6;
 }
 
 .heart-button {

@@ -12,7 +12,8 @@ const TweetPage = ({ tweetId, replies }) => (
   </div>
 )
 
-const mapStateToProps = ({ tweets }, { tweetId }) => {
+const mapStateToProps = ({ tweets }, props) => {
+  const tweetId = props.match.params.id
   return {
     tweetId,
     replies: tweets[tweetId].replies,

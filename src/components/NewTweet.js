@@ -33,6 +33,7 @@ class NewTweet extends Component {
   render() {
     const { text, redirectToHome } = this.state
 
+    // redirecting to / if a new tweet is added
     if (redirectToHome) {
       return <Redirect to='/' />
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { formatTweet, formatDate } from '../utils/helpers.js'
 import {
@@ -9,11 +10,13 @@ import {
 import { handleToggleTweet } from '../actions/tweets'
 
 class Tweet extends Component {
-  redirectToParent = () => {
-    // TODO: redirect to parent tweet on clicking @reply to @parent_id text
+  redirectToParent = (event, parentTweetId) => {
+    event.preventDefault()
+    this.props.history.push(`/tweet/${parentTweetId}`)
   }
 
-  handleLike = () => {
+  handleLike = event => {
+    event.preventDefault()
     const { authedUser, tweet } = this.props
     this.props.dispatch(
       handleToggleTweet({
@@ -44,7 +47,7 @@ class Tweet extends Component {
     } = tweet
 
     return (
-      <div className='tweet'>
+      <Link to={`/tweet/${id}`} className='tweet'>
         <img src={avatar} alt={`Avatar of ${name}`} className='avatar' />
         <div className='tweet-info'>
           <div>
@@ -74,7 +77,7 @@ class Tweet extends Component {
             </button>
           </div>
         </div>
-      </div>
+      </Link>
     )
   }
 }
@@ -90,4 +93,4 @@ const mapStateToProps = ({ tweets, users, authedUser }, { tweetId }) => {
   }
 }
 
-export default connect(mapStateToProps)(Tweet)
+export default withRouter(connect(mapStateToProps)(Tweet))
