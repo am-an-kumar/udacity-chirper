@@ -22,7 +22,7 @@ const mapStateToProps = ({ tweets }) => {
   return {
     tweetIds: Object.keys(tweets).sort(
       (firstTweet, secondTweet) =>
-        tweets[firstTweet].timestamp - tweets[secondTweet].timestamp,
+        tweets[secondTweet].timestamp - tweets[firstTweet].timestamp,
     ),
   }
 }
