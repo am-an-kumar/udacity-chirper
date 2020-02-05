@@ -1,8 +1,10 @@
-import { saveLikeToggle } from '../utils/api'
+import { saveLikeToggle, saveTweet } from '../utils/api'
+import { showLoading, hideLoading } from 'react-redux-loading'
 import { toast } from 'react-toastify'
 
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
+export const ADD_TWEET = 'ADD_TWEET'
 
 export const receiveTweets = tweets => ({
   type: RECEIVE_TWEETS,
@@ -39,5 +41,28 @@ export const handleToggleTweet = info => {
         // reverting the UI change if server returns an error
         dispatch(toggleTweet({ ...info }))
       })
+  }
+}
+
+const addTweet = tweet => ({
+  type: ADD_TWEET,
+  tweet,
+})
+
+export const handleAddTweet = (text, replyingTo) => {
+  return (dispatch, getState) => {
+    const { authedUser } = getState()
+
+    // showing the loading indicator prior to starting async process of saving a tweet
+    dispatch(showLoading())
+
+    // invoking saveTweet and once that succeeds, we dispatch ADD_TWEET action to update redux and once that is done, we hide the loading indicator
+    saveTweet({
+      text,
+      author: authedUser,
+      replyingTo,
+    })
+      .then(tweet => dispatch(addTweet(tweet)))
+      .then(() => hideLoading())
   }
 }
