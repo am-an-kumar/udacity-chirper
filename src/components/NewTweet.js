@@ -26,7 +26,7 @@ class NewTweet extends Component {
     // resetting form state
     this.setState({
       text: '',
-      redirectToHome: replyingTo !== null ? true : false,
+      redirectToHome: replyingTo ? false : true,
     })
   }
 
