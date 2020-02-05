@@ -20,13 +20,15 @@ class App extends Component {
         <>
           <LoadingBar />
           <div className='container'>
-            <Nav />
             {!this.props.loading && (
-              <div>
-                <Route exact path='/' component={Dashboard} />
-                <Route path='/new' component={NewTweet} />
-                <Route path='/tweet/:id' component={TweetPage} />
-              </div>
+              <>
+                <Nav />
+                <div>
+                  <Route exact path='/' component={Dashboard} />
+                  <Route path='/new' component={NewTweet} />
+                  <Route path='/tweet/:id' component={TweetPage} />
+                </div>
+              </>
             )}
           </div>
         </>
