@@ -1,4 +1,4 @@
-import { RECEIVE_TWEETS, TOGGLE_TWEET } from '../actions/tweets'
+import { RECEIVE_TWEETS, TOGGLE_TWEET, ADD_TWEET } from '../actions/tweets'
 
 const tweets = (state = {}, action) => {
   switch (action.type) {
@@ -7,6 +7,30 @@ const tweets = (state = {}, action) => {
         ...state,
         ...action.tweets,
       }
+
+    case ADD_TWEET: {
+      const { tweet } = action
+      const replyingTo = tweet.replyingTo
+
+      // if tweet is a reply to a pre-existing tweet
+      if (replyingTo !== null) {
+        // adding current tweet id to the list of replies for the parent tweet
+        return {
+          ...state,
+          [tweet.id]: tweet,
+          [replyingTo]: {
+            ...state[replyingTo],
+            replies: state[replyingTo].replies.concat([tweet.id]),
+          },
+        }
+      }
+
+      // no need to look for parent tweet if the new tweet is not a reply to some pre-existing tweet
+      return {
+        ...state,
+        [tweet.id]: tweet,
+      }
+    }
 
     case TOGGLE_TWEET: {
       const { id, hasLiked, authedUser, authorId } = action

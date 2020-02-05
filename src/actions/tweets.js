@@ -49,7 +49,7 @@ const addTweet = tweet => ({
   tweet,
 })
 
-export const handleAddTweet = (text, replyingTo) => {
+export const handleAddTweet = (text, replyingTo = null) => {
   return (dispatch, getState) => {
     const { authedUser } = getState()
 
@@ -63,6 +63,8 @@ export const handleAddTweet = (text, replyingTo) => {
       replyingTo,
     })
       .then(tweet => dispatch(addTweet(tweet)))
-      .then(() => hideLoading())
+      .then(() => {
+        dispatch(hideLoading())
+      })
   }
 }
