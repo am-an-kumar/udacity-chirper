@@ -1,4 +1,4 @@
-import { saveLikeToggle, saveTweet } from '../utils/api'
+import { saveLikeToggle, saveTweet, getTweets } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { toast } from 'react-toastify'
 
@@ -6,10 +6,17 @@ export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
 export const ADD_TWEET = 'ADD_TWEET'
 
-export const receiveTweets = tweets => ({
+const receiveTweets = tweets => ({
   type: RECEIVE_TWEETS,
   tweets,
 })
+
+export const handleReceiveTweets = () => dispatch => {
+  dispatch(showLoading())
+  getTweets()
+    .then(tweets => dispatch(receiveTweets(tweets)))
+    .then(() => dispatch(hideLoading()))
+}
 
 const toggleTweet = ({ id, authorId, authedUser, hasLiked }) => ({
   type: TOGGLE_TWEET,

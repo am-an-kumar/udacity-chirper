@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { FaSignOutAlt } from 'react-icons/fa/index'
 
 const Nav = ({ name, avatar }) => (
   <nav className='nav'>
@@ -18,6 +19,7 @@ const Nav = ({ name, avatar }) => (
       <li>
         <span>{`Hi ${name}!`}</span>
         <img src={avatar} alt={`Avatar of ${name}`} className='avatar' />
+        <FaSignOutAlt className='sign-out-icon' />
       </li>
     </ul>
   </nav>
